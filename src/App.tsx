@@ -1,23 +1,18 @@
 import './App.scss';
-import { level1, getPlayerPos } from './const/levels';
 import GameElements from './const/GameElements';
 import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { selectPlayerPos, selectLevel, setLevel, setPlayerPos } from './store/gameStatsSlice';
 import { dispatch } from './store';
 import cloneDeep from 'lodash/cloneDeep';
-import isEqual from 'lodash/isEqual';
+import Box from './images/i3.gif';
+import BoxOnGoal from './images/i4.gif';
+import Player from './images/i5.gif';
 
 const App = () => {
     const ref = useRef<HTMLDivElement>(null);
-    useEffect(() => {
-        dispatch(setLevel([...level1]));
-        dispatch(setPlayerPos(getPlayerPos(level1)));
-        ref?.current?.focus();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
 
-    const playerPos = useSelector(selectPlayerPos, isEqual);
+    const playerPos = useSelector(selectPlayerPos);
     const level = useSelector(selectLevel);
 
     const movePlayer = (dx: number, dy: number) => {
@@ -27,20 +22,21 @@ const App = () => {
         if (newCol < 0 || newRow < 0 || newRow >= level.length || newCol >= level[0].length) {
             return;
         }
-
+        const oldCell = level[playerPos.y][playerPos.x];
         const cell = level[newRow][newCol];
+        const newLevelState = cloneDeep(level);
 
         switch (cell) {
             case GameElements.Wall:
                 break;
             case GameElements.Empty:
             case GameElements.Goal:
+                newLevelState[playerPos.y][playerPos.x] =
+                    oldCell === GameElements.PlayerOnGoal ? GameElements.Goal : GameElements.Empty;
+                newLevelState[newRow][newCol] =
+                    cell === GameElements.Goal ? GameElements.PlayerOnGoal : GameElements.Player;
                 dispatch(setPlayerPos({ x: newCol, y: newRow }));
-                const newLevelState = cloneDeep(level);
-                newLevelState[playerPos.y][playerPos.x] = GameElements.Empty;
-                newLevelState[newRow][newCol] = GameElements.Player;
                 dispatch(setLevel(newLevelState));
-
                 break;
             case GameElements.Box:
             case GameElements.BoxOnGoal:
@@ -71,6 +67,10 @@ const App = () => {
         }
     };
 
+    useEffect(() => {
+        ref?.current?.focus();
+    }, []);
+
     const handleOnBlur = () => {
         ref?.current?.focus();
     };
@@ -85,12 +85,26 @@ const App = () => {
                                 return <div key={`${indexRow}-${indexCell}`} className="wall"></div>;
                             } else if (cell === GameElements.Empty) {
                                 return <div key={`${indexRow}-${indexCell}`} className="empty"></div>;
-                            } else if (cell === GameElements.Player) {
-                                return <div key={`${indexRow}-${indexCell}`} className="player"></div>;
-                            } else if (cell === GameElements.Box) {
-                                return <div key={`${indexRow}-${indexCell}`} className="box"></div>;
+                            } else if (cell === GameElements.Player || cell === GameElements.PlayerOnGoal) {
+                                return (
+                                    <div key={`${indexRow}-${indexCell}`} className="player">
+                                        <img src={Player} alt="box" />
+                                    </div>
+                                );
                             } else if (cell === GameElements.Goal) {
                                 return <div key={`${indexRow}-${indexCell}`} className="goal"></div>;
+                            } else if (cell === GameElements.Box) {
+                                return (
+                                    <div key={`${indexRow}-${indexCell}`} className="box">
+                                        <img src={Box} alt="box" />
+                                    </div>
+                                );
+                            } else if (cell === GameElements.BoxOnGoal) {
+                                return (
+                                    <div key={`${indexRow}-${indexCell}`} className="goal">
+                                        <img src={BoxOnGoal} alt="box" />
+                                    </div>
+                                );
                             }
                             return <div key={`${indexRow}-${indexCell}`} className="background"></div>;
                         })}

@@ -1,5 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '.';
+import { getPlayerPos, level1 } from '../const/levels';
 
 export type Position = { x: number; y: number };
 
@@ -9,8 +10,8 @@ interface IGameStats {
 }
 
 const initialState: IGameStats = {
-    level: [],
-    player: { x: 0, y: 0 }
+    level: [...level1],
+    player: getPlayerPos(level1)
 };
 
 export const gameStatsSlice = createSlice({

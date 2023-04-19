@@ -18,10 +18,23 @@
         height: 30px;
         font-size: 24px;
         text-align: center;
+
+        & > img {
+            width: 30px;
+            height: 30px;
+        }
+    }
+
+    .empty {
+        background-color: #2a2a2a;
     }
 
     .wall {
-        background-color: rgb(63, 63, 66);
+        background: linear-gradient(315deg, transparent 75%, #d45d55 0)-15px 0,
+        linear-gradient(45deg, transparent 75%, #d45d55 0)-15px 0,
+        linear-gradient(135deg, #a7332b 50%, transparent 0) 0 0,
+        linear-gradient(45deg, #6a201b 50%, #561a16 0) 0 0 #561a16;
+        background-size: 30px 30px;
     }
     
     .player {
@@ -33,6 +46,6 @@
     }
 
     .goal {
-        background: radial-gradient(circle, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 8%, rgba(255,255,255,1) 12%);
+        background: radial-gradient(circle, rgb(192, 77, 10) 0%, rgb(255, 165, 113) 14%, #2a2a2a 16%);
     }
 }
