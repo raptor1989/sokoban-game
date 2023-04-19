@@ -29,3 +29,4 @@ export const gameStatsSlice = createSlice({
 export const { setPlayerPos, setLevel } = gameStatsSlice.actions;
 
 export const selectPlayerPos = (state: RootState) => state.gameStats.player;
+export const selectLevel = (state: RootState) => state.gameStats.level;

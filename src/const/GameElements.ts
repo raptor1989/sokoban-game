@@ -1,8 +1,8 @@
 enum GameElements {
     Empty,
     Wall,
-    Box,
     Player,
+    Box,
     Goal,
     PlayerOnGoal,
     BoxOnGoal
