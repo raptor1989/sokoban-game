@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '.';
-import { getPlayerPos, level01, level1 } from '../const/levels';
+import { getPlayerPos, level01, level1 } from '../constants/levels';
 
 export type Position = { x: number; y: number };
 

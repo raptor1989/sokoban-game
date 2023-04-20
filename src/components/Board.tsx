@@ -1,15 +1,15 @@
-import './App.scss';
-import GameElements from './const/GameElements';
+import './Board.scss';
+import GameElements from '../constants/GameElements';
 import { useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
-import { selectPlayerPos, selectLevel, setLevel, setPlayerPos } from './store/gameStatsSlice';
-import { dispatch } from './store';
+import { selectPlayerPos, selectLevel, setLevel, setPlayerPos } from '../store/gameStatsSlice';
+import { dispatch } from '../store';
 import cloneDeep from 'lodash/cloneDeep';
-import Box from './images/i3.gif';
-import BoxOnGoal from './images/i4.gif';
-import Player from './images/i5.gif';
+import Box from '../images/i3.gif';
+import BoxOnGoal from '../images/i4.gif';
+import Player from '../images/i5.gif';
 
-const App = () => {
+const Board = () => {
     const ref = useRef<HTMLDivElement>(null);
 
     const playerPos = useSelector(selectPlayerPos);
@@ -127,4 +127,4 @@ const App = () => {
     );
 };
 
-export default App;
+export default Board;
