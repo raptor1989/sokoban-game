@@ -24,7 +24,13 @@ const Settings = () => {
 
     return (
         <div className="settings">
-            <Select options={levelOptions} className="level-select" onChange={onChangeLevel} isSearchable={false} />
+            <Select
+                options={levelOptions}
+                className="level-select"
+                onChange={onChangeLevel}
+                isSearchable={false}
+                defaultValue={levelOptions[0]}
+            />
             <button onClick={onResetClick}>Reset</button>
         </div>
     );
