@@ -8,6 +8,7 @@ interface IGameStats {
     level: number[][];
     player: Position;
     levelComplete: boolean;
+    prevLevelState?: number[][];
 }
 
 const initialState: IGameStats = {
@@ -28,12 +29,16 @@ export const gameStatsSlice = createSlice({
         },
         setLevelComplete: (state, action: PayloadAction<boolean>) => {
             state.levelComplete = action.payload;
+        },
+        setPrevLevelState: (state, action: PayloadAction<number[][] | undefined>) => {
+            state.prevLevelState = action.payload;
         }
     }
 });
 
-export const { setPlayerPos, setLevel, setLevelComplete } = gameStatsSlice.actions;
+export const { setPlayerPos, setLevel, setLevelComplete, setPrevLevelState } = gameStatsSlice.actions;
 
 export const selectPlayerPos = (state: RootState) => state.gameStats.player;
 export const selectLevel = (state: RootState) => state.gameStats.level;
 export const selectLevelComplete = (state: RootState) => state.gameStats.levelComplete;
+export const selectPrevLevelState = (state: RootState) => state.gameStats.prevLevelState;

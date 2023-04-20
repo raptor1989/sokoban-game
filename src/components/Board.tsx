@@ -8,7 +8,8 @@ import {
     setLevel,
     setPlayerPos,
     selectLevelComplete,
-    setLevelComplete
+    setLevelComplete,
+    setPrevLevelState
 } from '../store/gameStatsSlice';
 import { dispatch } from '../store';
 import cloneDeep from 'lodash/cloneDeep';
@@ -41,6 +42,7 @@ const Board = () => {
                     oldCell === GameElements.PlayerOnGoal ? GameElements.Goal : GameElements.Empty;
                 newLevelState[newRow][newCol] =
                     newCell === GameElements.Goal ? GameElements.PlayerOnGoal : GameElements.Player;
+                dispatch(setPrevLevelState(level));
                 dispatch(setPlayerPos({ x: newCol, y: newRow }));
                 dispatch(setLevel(newLevelState));
                 break;
@@ -60,6 +62,7 @@ const Board = () => {
                     newBoxCell === GameElements.Goal || newBoxCell === GameElements.BoxOnGoal
                         ? GameElements.BoxOnGoal
                         : GameElements.Box;
+                dispatch(setPrevLevelState(level));
                 dispatch(setPlayerPos({ x: newCol, y: newRow }));
                 dispatch(setLevel(newLevelState));
                 const isLevelComplete = allBlocksOnGoals(newLevelState);
