@@ -1,4 +1,5 @@
 import { Position } from '../store/gameStatsSlice';
+import GameElements from './GameElements';
 
 export const level01 = [
     [1, 1, 1, 1, 1],
@@ -23,19 +24,35 @@ export const level1 = [
 ];
 
 export const getPlayerPos = (levels: number[][]): Position => {
-    var r;
-    var c;
+    let r;
+    let c;
     for (r = 0; r < levels.length; ++r) {
         const nsLevels = levels[r];
         for (c = 0; c < nsLevels.length; ++c) {
             const value = nsLevels[c];
-            if (value === 2) {
+            if (value === GameElements.Player) {
                 return { x: c, y: r };
             }
         }
     }
 
     return { x: 0, y: 0 };
+};
+
+export const allBlocksOnGoals = (levels: number[][]): boolean => {
+    let r;
+    let c;
+    for (r = 0; r < levels.length; ++r) {
+        const nsLevels = levels[r];
+        for (c = 0; c < nsLevels.length; ++c) {
+            const value = nsLevels[c];
+            if (value === GameElements.Box) {
+                return false;
+            }
+        }
+    }
+
+    return true;
 };
 
 export const level2 = [
@@ -835,4 +852,268 @@ export const level50 = [
     [77, 77, 1, 0, 0, 1, 1, 1, 77, 77, 77, 1, 1, 0, 0, 0, 0, 0, 1],
     [77, 77, 1, 0, 0, 1, 77, 77, 77, 77, 77, 77, 1, 0, 0, 0, 0, 1, 1],
     [77, 77, 1, 1, 1, 1, 77, 77, 77, 77, 77, 77, 1, 1, 1, 1, 1, 1, 77]
+];
+
+var foo = [];
+for (let index = 1; index < 51; index++) {
+    foo.push({ value: index, label: `Level ${index}`, data: `level${index}` });
+}
+
+export interface IOptionSelect {
+    value: number;
+    label: string;
+    data: number[][];
+}
+
+export const levelOptions: Array<IOptionSelect> = [
+    {
+        value: 1,
+        label: 'Level 1',
+        data: level1
+    },
+    {
+        value: 2,
+        label: 'Level 2',
+        data: level2
+    },
+    {
+        value: 3,
+        label: 'Level 3',
+        data: level3
+    },
+    {
+        value: 4,
+        label: 'Level 4',
+        data: level4
+    },
+    {
+        value: 5,
+        label: 'Level 5',
+        data: level5
+    },
+    {
+        value: 6,
+        label: 'Level 6',
+        data: level6
+    },
+    {
+        value: 7,
+        label: 'Level 7',
+        data: level7
+    },
+    {
+        value: 8,
+        label: 'Level 8',
+        data: level8
+    },
+    {
+        value: 9,
+        label: 'Level 9',
+        data: level9
+    },
+    {
+        value: 10,
+        label: 'Level 10',
+        data: level10
+    },
+    {
+        value: 11,
+        label: 'Level 11',
+        data: level11
+    },
+    {
+        value: 12,
+        label: 'Level 12',
+        data: level12
+    },
+    {
+        value: 13,
+        label: 'Level 13',
+        data: level13
+    },
+    {
+        value: 14,
+        label: 'Level 14',
+        data: level14
+    },
+    {
+        value: 15,
+        label: 'Level 15',
+        data: level15
+    },
+    {
+        value: 16,
+        label: 'Level 16',
+        data: level16
+    },
+    {
+        value: 17,
+        label: 'Level 17',
+        data: level17
+    },
+    {
+        value: 18,
+        label: 'Level 18',
+        data: level18
+    },
+    {
+        value: 19,
+        label: 'Level 19',
+        data: level19
+    },
+    {
+        value: 20,
+        label: 'Level 20',
+        data: level20
+    },
+    {
+        value: 21,
+        label: 'Level 21',
+        data: level21
+    },
+    {
+        value: 22,
+        label: 'Level 22',
+        data: level22
+    },
+    {
+        value: 23,
+        label: 'Level 23',
+        data: level23
+    },
+    {
+        value: 24,
+        label: 'Level 24',
+        data: level24
+    },
+    {
+        value: 25,
+        label: 'Level 25',
+        data: level25
+    },
+    {
+        value: 26,
+        label: 'Level 26',
+        data: level26
+    },
+    {
+        value: 27,
+        label: 'Level 27',
+        data: level27
+    },
+    {
+        value: 28,
+        label: 'Level 28',
+        data: level28
+    },
+    {
+        value: 29,
+        label: 'Level 29',
+        data: level29
+    },
+    {
+        value: 30,
+        label: 'Level 30',
+        data: level30
+    },
+    {
+        value: 31,
+        label: 'Level 31',
+        data: level31
+    },
+    {
+        value: 32,
+        label: 'Level 32',
+        data: level32
+    },
+    {
+        value: 33,
+        label: 'Level 33',
+        data: level33
+    },
+    {
+        value: 34,
+        label: 'Level 34',
+        data: level34
+    },
+    {
+        value: 35,
+        label: 'Level 35',
+        data: level35
+    },
+    {
+        value: 36,
+        label: 'Level 36',
+        data: level36
+    },
+    {
+        value: 37,
+        label: 'Level 37',
+        data: level37
+    },
+    {
+        value: 38,
+        label: 'Level 38',
+        data: level38
+    },
+    {
+        value: 39,
+        label: 'Level 39',
+        data: level39
+    },
+    {
+        value: 40,
+        label: 'Level 40',
+        data: level40
+    },
+    {
+        value: 41,
+        label: 'Level 41',
+        data: level41
+    },
+    {
+        value: 42,
+        label: 'Level 42',
+        data: level42
+    },
+    {
+        value: 43,
+        label: 'Level 43',
+        data: level43
+    },
+    {
+        value: 44,
+        label: 'Level 44',
+        data: level44
+    },
+    {
+        value: 45,
+        label: 'Level 45',
+        data: level45
+    },
+    {
+        value: 46,
+        label: 'Level 46',
+        data: level46
+    },
+    {
+        value: 47,
+        label: 'Level 47',
+        data: level47
+    },
+    {
+        value: 48,
+        label: 'Level 48',
+        data: level48
+    },
+    {
+        value: 49,
+        label: 'Level 49',
+        data: level49
+    },
+    {
+        value: 50,
+        label: 'Level 50',
+        data: level50
+    }
 ];

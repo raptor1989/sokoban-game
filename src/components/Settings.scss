@@ -1,0 +1,32 @@
+.settings {
+    padding: 30px;
+    display: flex;
+    justify-content: center;
+    
+    .level-select {
+        width: 180px;
+    }
+
+    button {
+        margin-left: 15px;
+        background-color: rgba(0,120,212,1);
+        color: rgba(255,255,255,1);
+        align-items: center;
+        border-radius: 2px;
+        border: 1px solid transparent;
+        cursor: pointer;
+        display: inline-flex;
+        flex-direction: row;
+        font-weight: 600;
+        justify-content: center;
+        outline: none;
+        overflow: visible;
+        padding: 10px 30px;
+        position: relative;
+        transition: background 80ms linear;
+
+        &:hover {
+            background-color: rgba(0,103,181,1);
+        }
+    }
+}
