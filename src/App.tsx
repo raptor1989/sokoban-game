@@ -18,15 +18,11 @@ const App = () => {
     const movePlayer = (dx: number, dy: number) => {
         const newCol = playerPos.x + dx;
         const newRow = playerPos.y + dy;
-
-        if (newCol < 0 || newRow < 0 || newRow >= level.length || newCol >= level[0].length) {
-            return;
-        }
         const oldCell = level[playerPos.y][playerPos.x];
-        const cell = level[newRow][newCol];
+        const newCell = level[newRow][newCol];
         const newLevelState = cloneDeep(level);
 
-        switch (cell) {
+        switch (newCell) {
             case GameElements.Wall:
                 break;
             case GameElements.Empty:
@@ -34,12 +30,28 @@ const App = () => {
                 newLevelState[playerPos.y][playerPos.x] =
                     oldCell === GameElements.PlayerOnGoal ? GameElements.Goal : GameElements.Empty;
                 newLevelState[newRow][newCol] =
-                    cell === GameElements.Goal ? GameElements.PlayerOnGoal : GameElements.Player;
+                    newCell === GameElements.Goal ? GameElements.PlayerOnGoal : GameElements.Player;
                 dispatch(setPlayerPos({ x: newCol, y: newRow }));
                 dispatch(setLevel(newLevelState));
                 break;
             case GameElements.Box:
             case GameElements.BoxOnGoal:
+                const newBoxCol = newCol + dx;
+                const newBoxRow = newRow + dy;
+                const newBoxCell = level[newBoxRow][newBoxCol];
+                if ([GameElements.Box, GameElements.BoxOnGoal, GameElements.Wall].some((x) => x === newBoxCell)) {
+                    return;
+                }
+                newLevelState[playerPos.y][playerPos.x] =
+                    oldCell === GameElements.PlayerOnGoal ? GameElements.Goal : GameElements.Empty;
+                newLevelState[newRow][newCol] =
+                    newCell === GameElements.BoxOnGoal ? GameElements.PlayerOnGoal : GameElements.Player;
+                newLevelState[newBoxRow][newBoxCol] =
+                    newBoxCell === GameElements.Goal || newBoxCell === GameElements.BoxOnGoal
+                        ? GameElements.BoxOnGoal
+                        : GameElements.Box;
+                dispatch(setPlayerPos({ x: newCol, y: newRow }));
+                dispatch(setLevel(newLevelState));
                 break;
 
             default:

@@ -1,20 +1,12 @@
 import { Position } from '../store/gameStatsSlice';
 
-export interface Level {
-    cells: Array<number[]>;
-    playerPos: Position;
-}
-
-export const level01: Level = {
-    cells: [
-        [1, 1, 1, 1, 1],
-        [1, 4, 3, 0, 1],
-        [1, 0, 2, 0, 1],
-        [1, 0, 0, 0, 1],
-        [1, 1, 1, 1, 1]
-    ],
-    playerPos: { x: 2, y: 2 }
-};
+export const level01 = [
+    [1, 1, 1, 1, 1],
+    [1, 4, 3, 0, 1],
+    [1, 0, 2, 0, 1],
+    [1, 0, 0, 0, 1],
+    [1, 1, 1, 1, 1]
+];
 
 export const level1 = [
     [77, 77, 77, 77, 1, 1, 1, 1, 1, 77, 77, 77, 77, 77, 77, 77, 77, 77, 77],
