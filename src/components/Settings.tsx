@@ -1,6 +1,6 @@
 import './Settings.scss';
 import Select, { SingleValue } from 'react-select';
-import { IOptionSelect, getPlayerPos, levelOptions } from '../constants/levels';
+import { IOptionSelect, getPlayerPos, level1, levelOptions } from '../constants/levels';
 import { dispatch } from '../store';
 import {
     setLevel,
@@ -15,7 +15,7 @@ import { useSelector } from 'react-redux';
 const Settings = () => {
     const prevLevelState = useSelector(selectPrevLevelState);
 
-    const [currentLevel, setCurrentLevel] = useState<number[][]>([]);
+    const [currentLevel, setCurrentLevel] = useState<number[][]>(level1);
     const onChangeLevel = (option: SingleValue<IOptionSelect>) => {
         dispatch(setPlayerPos(getPlayerPos(option?.data ?? [])));
         dispatch(setLevel(option?.data ?? []));
